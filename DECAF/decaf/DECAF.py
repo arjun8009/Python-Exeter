@@ -205,6 +205,7 @@ class DECAF(pl.LightningModule):
     ):
         super().__init__()
         self.save_hyperparameters()
+        self.automatic_optimization=False
 
         self.iterations_d = 0
         self.iterations_g = 0
@@ -341,12 +342,12 @@ class DECAF(pl.LightningModule):
         dense_dag = np.array(self.get_dag())
         dense_dag[dense_dag > 0.5] = 1
         dense_dag[dense_dag <= 0.5] = 0
-        G = nx.from_numpy_matrix(dense_dag, create_using=nx.DiGraph)
+        G = nx.from_numpy_array(dense_dag, create_using=nx.DiGraph)
         gen_order = list(nx.algorithms.dag.topological_sort(G))
         return gen_order
 
     def training_step(
-        self, batch: torch.Tensor, batch_idx: int, optimizer_idx: int
+        self, batch: torch.Tensor, batch_idx: int, optimizer_idx=0
     ) -> OrderedDict:
         # sample noise
         z = self.sample_z(batch.shape[0])
