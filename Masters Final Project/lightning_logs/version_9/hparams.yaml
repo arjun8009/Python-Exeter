@@ -1,0 +1,23 @@
+alpha: 2
+b1: 0.5
+b2: 0.999
+batch_size: 64
+dag_seed:
+- - 0
+  - 2
+- - 1
+  - 2
+- - 2
+  - 3
+eps: 1.0e-08
+grad_dag_loss: false
+h_dim: 200
+input_dim: 4
+l1_W: 0.0001
+l1_g: 0
+lambda_gp: 10
+lambda_privacy: 0
+lr: 0.0005
+nonlin_out: null
+rho: 2
+weight_decay: 0.01
